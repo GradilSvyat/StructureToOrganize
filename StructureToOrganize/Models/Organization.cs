@@ -9,6 +9,10 @@ namespace StructureToOrganize.Models
 {
     public class Organization
     {
+        public Organization()
+        {
+            Countries = new List<Country>();
+        }
         [Required]
         public string Name { get; set; }
         [Key]
@@ -27,12 +31,14 @@ namespace StructureToOrganize.Models
                     organizationType = value;
             }
         }
+        public ICollection<Country> Countries { get; set; }
+
         private string organizationType;
         public List<string> GetAllOrganizationType ()
         {
             return allOrganizationType;
         }
-        private static List <string> allOrganizationType = new List <string>()
+        private static readonly List <string> allOrganizationType = new List <string>()
         {
             "General Partnership",
             "Limited partnerships",

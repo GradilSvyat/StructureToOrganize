@@ -11,5 +11,7 @@ namespace StructureToOrganize.Models
     {
         [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public string Name { get; set; }
+        public int? OfferingId { get; set; }
+        public Offering Offering { get; set; }
     }
 }
