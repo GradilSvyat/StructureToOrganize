@@ -15,27 +15,31 @@ namespace StructureToOrganize.Models
         public int Code { get; set; }
         [Required]
         public string Owner { get; set; }
-        public string GetOrganizationType (byte key)
+        public string OrganizationType
         {
-            return organizationType[key];
+            get 
+            {
+                return organizationType;
+            }
+            set
+            {
+                if (allOrganizationType.Contains(value))
+                    organizationType = value;
+            }
         }
+        private string organizationType;
         public List<string> GetAllOrganizationType ()
         {
-            List<string> result = new List<string>();
-            foreach(KeyValuePair<byte, string> keyValuePair in organizationType)
-            {
-                result.Add(keyValuePair.Value);
-            }
-            return result;
+            return allOrganizationType;
         }
-        private Dictionary<byte, string> organizationType = new Dictionary<byte, string>()
+        private static List <string> allOrganizationType = new List <string>()
         {
-            { 0, "General Partnership"},
-            { 1, "Limited partnerships"},
-            { 2, "Limited Liability Company (Co.Ltd.)"},
-            { 3, "Incorporated company"},
-            { 4, "Social enterprise"},
-            { 5, "Other"}
+            "General Partnership",
+            "Limited partnerships",
+            "Limited Liability Company (Co.Ltd.)",
+            "Incorporated company",
+            "Social enterprise",
+            "Other"
         };
     }
 }
