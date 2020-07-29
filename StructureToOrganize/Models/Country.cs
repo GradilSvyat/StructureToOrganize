@@ -15,8 +15,10 @@ namespace StructureToOrganize.Models
         }
         [Key]
         public int Id { get; set; }
+        [Required]
         public string Name { get; set; }
         public int Code { get; set; }
+        [ForeignKey("Organization")]
         public int? OrganizationCode { get; set; }
         public Organization Organization { get; set; }
         public ICollection<Business> Businesses { get; set; }

@@ -9,8 +9,10 @@ namespace StructureToOrganize.Models
 {
     public class Department
     {
-        [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        //[Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        [Required]
         public string Name { get; set; }
+        [ForeignKey("Offering")]
         public int? OfferingId { get; set; }
         public Offering Offering { get; set; }
     }
