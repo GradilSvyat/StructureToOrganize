@@ -22,6 +22,10 @@ namespace StructureToOrganize.Models
         public int? OrganizationCode { get; set; }
         public Organization Organization { get; set; }
         public ICollection<Business> Businesses { get; set; }
+        public static Dictionary<string,string> GetAllCountry ()
+        {
+            return allCountry;
+        }
         private static readonly Dictionary<string, string> allCountry = new Dictionary<string, string>()
         {
             {"895","Абхазия"},

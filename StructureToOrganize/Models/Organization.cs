@@ -34,7 +34,7 @@ namespace StructureToOrganize.Models
         public ICollection<Country> Countries { get; set; }
 
         private string organizationType;
-        public List<string> GetAllOrganizationType ()
+        public static List<string> GetAllOrganizationType ()
         {
             return allOrganizationType;
         }
