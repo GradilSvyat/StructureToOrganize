@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
+using StructureToOrganize.Models;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -17,12 +18,25 @@ namespace StructureToOrganize.Controllers
         StructureToOrganize.Models.OrganizationContext context = new StructureToOrganize.Models.OrganizationContext();
         // GET: api/<OrganizationController>
         [HttpGet]
-        public string Get()
+        public IEnumerable<string> Get()
         {
-            context.Organizations.Add(new Models.Organization() { Name = "MyOrganization", Owner = "TestOwner", OrganizationType = "Social enterprise" });
-            context.SaveChanges();
-            var organization = context.Organizations.First();
-            return String.Concat("Название организации - ", organization.Name,"\nИмя владельца - ",organization.Owner, "\nТип организации - ", organization.OrganizationType,"\nКод организации - ",organization.Code.ToString());
+            //context.Organizations.Add(new Models.Organization() 
+            //{ Name = "MyOrganization", 
+            //    Owner = "Owner", 
+            //    OrganizationType = "Incorporated company", 
+            //    Code = 475, Countries = new List<Country>() { new Country() { Code = 804, Name = "Украина" } }
+            //});
+            //context.SaveChanges();
+            var organization = context.Organizations.ToList<Organization>();
+            var countries = context.Countries.ToList<Country>();
+            List<string> result = new List<string>();
+            foreach (var item in organization)
+            {
+                result.Add(String.Concat("Название организации - ", item.Name, "\nИмя владельца - ", item.Owner, "\nТип организации - ", item.OrganizationType, "\nКод организации - ", item.Code.ToString()));
+            }
+            foreach (var item in countries)
+                result.Add((String.Concat(item.Name,item.Code, item.Organization.Name)));
+            return result;
         }
 
         // GET api/<OrganizationController>/5

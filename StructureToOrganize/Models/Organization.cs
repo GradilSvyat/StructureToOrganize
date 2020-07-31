@@ -13,9 +13,10 @@ namespace StructureToOrganize.Models
         {
             Countries = new List<Country>();
         }
+        [Key]
+        public int Id { get; set; }
         [Required]
         public string Name { get; set; }
-        [Key]
         public int Code { get; set; }
         [Required]
         public string Owner { get; set; }
