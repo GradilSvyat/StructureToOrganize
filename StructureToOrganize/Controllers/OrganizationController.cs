@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using StructureToOrganize.Models;
@@ -47,18 +48,21 @@ namespace StructureToOrganize.Controllers
         }
 
         // POST api/<OrganizationController>
+        [Authorize]
         [HttpPost]
         public void Post([FromBody] string value)
         {
         }
 
         // PUT api/<OrganizationController>/5
+        [Authorize]
         [HttpPut("{id}")]
         public void Put(int id, [FromBody] string value)
         {
         }
 
         // DELETE api/<OrganizationController>/5
+        [Authorize]
         [HttpDelete("{id}")]
         public void Delete(int id)
         {
