@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
@@ -12,6 +13,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using Microsoft.IdentityModel.Tokens;
 
 namespace StructureToOrganize
 {
@@ -28,10 +30,26 @@ namespace StructureToOrganize
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
-            //services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme);
-            //services.ConfigureApplicationCookie(p=> { });
-            services.AddDbContext<AplicationDBContext>(p => { p.UseSqlServer(""); });
-            services.AddIdentity<IdentityUser, IdentityRole>().AddEntityFrameworkStores<AplicationDBContext>();
+            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+                    .AddJwtBearer(options =>
+                    {
+                        options.RequireHttpsMetadata = false;
+                        options.TokenValidationParameters = new TokenValidationParameters
+                        {
+                            ValidateIssuer = true, // укзывает, будет ли валидироваться издатель при валидации токена
+                            ValidIssuer = AuthOptions.ISSUER, // строка, представляющая издателя
+                            ValidateAudience = true, // будет ли валидироваться потребитель токена
+                            ValidAudience = AuthOptions.AUDIENCE, // установка потребителя токена
+                            ValidateLifetime = true, // будет ли валидироваться время существования
+                            IssuerSigningKey = AuthOptions.GetSymmetricSecurityKey(), // установка ключа безопасности
+                            ValidateIssuerSigningKey = true, // валидация ключа безопасности
+                        };
+                    });
+            //services.AddDbContext<AplicationDBContext>(p => 
+            //{ 
+            //    p.UseSqlServer("Server = (localdb)\\mssqllocaldb; Database = IdentityUser; Trusted_Connection = True; "); 
+            //});
+            //services.AddIdentity<IdentityUser, IdentityRole>().AddEntityFrameworkStores<AplicationDBContext>();
             services.AddAuthorization();
         }
 
