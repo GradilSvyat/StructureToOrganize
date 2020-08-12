@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 using System.Security.Claims;
+using System.Threading.Tasks;
 using System.Web.Helpers;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
@@ -61,6 +62,23 @@ namespace StructureToOrganize.Controllers
                 return claimsIdentity;
             }
             return null;
+        }
+        [HttpPost("/register")]
+        public async Task<IActionResult> Register(User model)
+        {
+            if (model != null)
+            {
+                User user = context.Users.FirstOrDefault(u => u.Email == model.Email);
+                if (user == null)
+                {
+                    context.Users.Add(model);
+                    await context.SaveChangesAsync();
+                    return Json("Пользователь добавлен");
+                }
+                else
+                    return Json("Пользователь с таким Email уже сузествует!");
+            }
+            return Json("Введены не все данные");
         }
     }
 }
