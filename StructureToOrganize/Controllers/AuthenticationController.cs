@@ -76,7 +76,7 @@ namespace StructureToOrganize.Controllers
                     return Json("Пользователь добавлен");
                 }
                 else
-                    return Json("Пользователь с таким Email уже сузествует!");
+                    return Json("Пользователь с таким Email уже существует!");
             }
             return Json("Введены не все данные");
         }
