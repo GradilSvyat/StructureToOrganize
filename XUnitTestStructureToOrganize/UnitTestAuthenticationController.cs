@@ -3,7 +3,8 @@ using System.Resources;
 using System.Threading.Tasks;
 using Xunit;
 using StructureToOrganize.Controllers;
-using System.Web.Mvc;
+using StructureToOrganize.Models;
+using Newtonsoft.Json;
 
 namespace XUnitTestStructureToOrganize
 {
@@ -14,19 +15,25 @@ namespace XUnitTestStructureToOrganize
         {
             // Arrange
             string userEmail = "same_mail@test.com";
-            User user = new User(Name = "TestName",
-                                Surname = "TestSurname",
-                                Email = userEmail,
-                                Password = "TestPassword");
-            User newUser = new User(Name = "AnotherName",
-                                Surname = "AnotherSurname",
-                                Email = userEmail,
-                                Password = "AnotherPassword");
-
+            User user = new User
+            {
+                Name = "TestName",
+                Surname = "TestSurname",
+                Email = userEmail,
+                Password = "TestPassword"
+            };
+            User newUser = new User
+            {
+                Name = "AnotherName",
+                Surname = "AnotherSurname",
+                Email = userEmail,
+                Password = "AnotherPassword"
+            };
+            var controller = new AuthenticationController();
             // Act
-            var result = Register(newUser);
+            var result = controller.Register(newUser);
             // Assert
-            Assert.Same(result, Controller.Json("A user with this Email already exists!"));
+            Assert.Same(result, JsonConvert.SerializeObject("A user with this Email already exists!"));
         }
     }
 }
