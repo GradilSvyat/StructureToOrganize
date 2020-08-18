@@ -5,7 +5,7 @@ VisualStudioVersion = 16.0.30204.135
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StructureToOrganize", "StructureToOrganize\StructureToOrganize.csproj", "{125DEFA0-ABA6-4394-A3CA-9BCD6B7322A4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XUnitTestStructureToOrganize", "XUnitTestStructureToOrganize\XUnitTestStructureToOrganize.csproj", "{B0466BC8-896F-424A-B019-3271259B1DA5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "XUnitTestStructureToOrganize", "XUnitTestStructureToOrganize\XUnitTestStructureToOrganize.csproj", "{B0466BC8-896F-424A-B019-3271259B1DA5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -16,7 +16,7 @@ namespace StructureToOrganize.Controllers
     [ApiController]
     public class OrganizationController : ControllerBase
     {
-        StructureToOrganize.Models.OrganizationContext context = new StructureToOrganize.Models.OrganizationContext();
+        OrganizationContext context = new OrganizationContext();
         // GET: api/<OrganizationController>
         [HttpGet]
         public IEnumerable<string> Get()
