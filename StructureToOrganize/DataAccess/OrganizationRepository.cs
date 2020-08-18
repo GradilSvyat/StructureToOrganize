@@ -29,11 +29,10 @@ namespace StructureToOrganize.DataAccess
             return this.DBSet.Find(id);
         }
 
-        public T Create(T entity)
+        public void Create(T entity)
         {
             var result = this.DBSet.Add(entity);
             context.SaveChanges();
-            return entity;
         }
 
         public void Update(T entity)
