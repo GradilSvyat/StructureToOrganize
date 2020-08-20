@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using StructureToOrganize.Models;
+using StructureToOrganize.Services;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -17,18 +18,17 @@ namespace StructureToOrganize.Controllers
     public class OrganizationController : ControllerBase
     {
         OrganizationContext context = new OrganizationContext();
+        private readonly OrganizationService organizationService;
+        public OrganizationController(OrganizationService organizationService)
+        {
+            this.organizationService = organizationService;
+        }
         // GET: api/<OrganizationController>
         [HttpGet]
         public IEnumerable<string> Get()
         {
-            //context.Organizations.Add(new Models.Organization() 
-            //{ Name = "MyOrganization", 
-            //    Owner = "Owner", 
-            //    OrganizationType = "Incorporated company", 
-            //    Code = 475, Countries = new List<Country>() { new Country() { Code = 804, Name = "Украина" } }
-            //});
-            //context.SaveChanges();
-            var organization = context.Organizations.ToList<Organization>();
+            var organization = organizationService.GetOrganizations();
+                //context.Organizations.ToList<Organization>();
             var countries = context.Countries.ToList<Country>();
             List<string> result = new List<string>();
             foreach (var item in organization)
@@ -44,7 +44,7 @@ namespace StructureToOrganize.Controllers
         [HttpGet("{id}")]
         public string Get(int id)
         {
-            return "value";
+            return this.organizationService.GetOrganization(id).Name; ;
         }
 
         // POST api/<OrganizationController>

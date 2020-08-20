@@ -12,6 +12,10 @@ namespace StructureToOrganize.Services
         private readonly OrganizationRepository<Organization> organizationRepository;
         private readonly OrganizationRepository<Country> countryRepository;
         private readonly OrganizationRepository<Business> businessRepository;
+        public OrganizationService()
+        {
+
+        }
         public OrganizationService(OrganizationRepository<Organization> organizationRepository, OrganizationRepository<Country> countryRepository, OrganizationRepository<Business> businessRepository)
         {
             this.organizationRepository = organizationRepository;

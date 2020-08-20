@@ -14,6 +14,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
+using StructureToOrganize.Services;
 
 namespace StructureToOrganize
 {
@@ -51,6 +52,7 @@ namespace StructureToOrganize
             //});
             //services.AddIdentity<IdentityUser, IdentityRole>().AddEntityFrameworkStores<AplicationDBContext>();
             services.AddAuthorization();
+            services.AddScoped<OrganizationService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

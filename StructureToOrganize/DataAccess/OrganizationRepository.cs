@@ -21,7 +21,7 @@ namespace StructureToOrganize.DataAccess
 
         public List<T> GetAll()
         {
-            return this.DBSet.ToList();
+            return this.DBSet.ToList<T>();
         }
 
         public T GetById(int id)
